@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Vocabulary - Oct 5, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#e9f2ee; --grid:#cfe2da; --ink:#16213e; --card:#fffdf8;
+  --sun:#ffd23f; --violet:#6c4cff; --lime:#b8f35c; --coral:#ff6b57; --mute:#55607d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; padding:24px 14px; display:flex; justify-content:center; align-items:flex-start;
+  font-family:'Bricolage Grotesque','Trebuchet MS',Arial,sans-serif; color:var(--ink);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.sheet{width:100%; max-width:620px; background:var(--card); border:3px solid var(--ink); border-radius:18px; box-shadow:8px 8px 0 var(--ink); position:relative; margin-top:14px}
+.hidden{display:none!important}
+.hdr{padding:26px 26px 20px; border-bottom:3px solid var(--ink); background:var(--violet); color:#fff; border-radius:15px 15px 0 0; position:relative}
+.hdr h1{margin:0; font-size:2rem; line-height:1.05; font-weight:800; letter-spacing:-.02em}
+.hdr p{margin:6px 0 0; font-weight:600; opacity:.92}
+.date{
+  position:absolute; top:-18px; right:18px; transform:rotate(3deg);
+  background:var(--sun); color:var(--ink); border:3px solid var(--ink); border-radius:8px;
+  padding:2px 14px 4px; font-family:'Caveat','Comic Sans MS',cursive; font-size:1.55rem; line-height:1.2; box-shadow:3px 3px 0 var(--ink);
+}
+.hdr.slim{padding:16px 22px}
+.hdr.slim h1{font-size:1.15rem}
+.body{padding:24px 26px 28px}
+.note{background:var(--sun); border:3px solid var(--ink); border-radius:12px; padding:12px 14px; font-size:.92rem; margin-bottom:22px; font-weight:600}
+label{display:block; font-weight:800; margin-bottom:6px}
+.field{margin-bottom:16px}
+input[type=text]{width:100%; padding:13px 14px; font:inherit; font-size:1.05rem; color:var(--ink); background:#fff; border:3px solid var(--ink); border-radius:12px; outline:none}
+input[type=text]:focus{box-shadow:4px 4px 0 var(--violet)}
+.btn{
+  width:100%; font:inherit; font-weight:800; font-size:1.05rem; cursor:pointer; padding:14px 18px; color:#fff; background:var(--violet);
+  border:3px solid var(--ink); border-radius:12px; box-shadow:4px 4px 0 var(--ink); transition:transform .08s, box-shadow .08s;
+}
+.btn:active:not(:disabled){transform:translate(4px,4px); box-shadow:0 0 0 var(--ink)}
+.btn:disabled{opacity:.6; cursor:default}
+.btn.go{background:var(--lime); color:var(--ink)}
+.btn:focus-visible,.opt:focus-visible,.spk:focus-visible{outline:3px dashed var(--ink); outline-offset:3px}
+.center{text-align:center}
+.mt{margin-top:16px}
+/* progress */
+.prog{padding:18px 26px 0}
+.pinfo{display:flex; justify-content:space-between; font-weight:800; font-size:.9rem; margin-bottom:6px}
+.track{height:16px; border:3px solid var(--ink); border-radius:99px; background:#fff; overflow:hidden}
+.bar{height:100%; width:0; background:repeating-linear-gradient(-45deg,var(--violet) 0 8px,#8a70ff 8px 16px); transition:width .3s}
+/* quiz */
+.prompt{font-size:2.3rem; font-weight:800; letter-spacing:-.02em; margin:18px 0 6px}
+.sub{color:var(--mute); font-weight:600; margin:0}
+.spk{
+  width:92px; height:92px; border-radius:50%; font-size:2.2rem; cursor:pointer; background:var(--sun);
+  border:3px solid var(--ink); box-shadow:5px 5px 0 var(--ink); margin:14px auto 10px; display:block; transition:transform .08s, box-shadow .08s;
+}
+.spk:active{transform:translate(5px,5px); box-shadow:0 0 0 var(--ink)}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:22px}
+@media(max-width:480px){.opts{grid-template-columns:1fr} .hdr h1{font-size:1.6rem} .prompt{font-size:1.9rem}}
+.opt{
+  font:inherit; font-weight:600; font-size:1.02rem; padding:14px; cursor:pointer; color:var(--ink); background:#fff;
+  border:3px solid var(--ink); border-radius:12px; box-shadow:3px 3px 0 var(--ink);
+}
+.opt:hover:not(:disabled){background:#f1ecff}
+.opt.ok{background:var(--lime)}
+.opt.no{background:var(--coral); color:#fff}
+.opt:disabled{cursor:default}
+.recall{font-size:1.5rem; text-align:center; letter-spacing:3px; text-transform:uppercase; font-weight:800}
+.badge{display:inline-block; background:var(--lime); border:3px solid var(--ink); border-radius:99px; padding:3px 16px; font-weight:800; margin-bottom:8px; transform:rotate(-2deg)}
+/* result */
+.card{border:3px dashed var(--ink); border-radius:14px; padding:22px 18px; background:#fff; position:relative; margin:18px 0 22px}
+.score{font-size:5.2rem; font-weight:800; line-height:1; letter-spacing:-.04em; color:var(--violet); display:block; margin:6px 0}
+.stamp{
+  display:inline-block; transform:rotate(-5deg); border:3px solid var(--coral); color:var(--coral); border-radius:10px;
+  padding:0 14px 3px; font-family:'Caveat','Comic Sans MS',cursive; font-size:1.7rem; margin-top:10px;
+}
+.meta{margin:4px 0; font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="exerciseTopic" style="display:none">[Vocabulary Pertama Oktober 2026 Kelas 7]</div>
+
+<main class="sheet" id="app">
+
+  <!-- Login -->
+  <section id="s-login">
+    <div class="hdr">
+      <div class="date">Oct 5, 2026</div>
+      <h1>Word Workout</h1>
+      <p>English Daily Exercise - Adjectives &amp; Everyday Nouns</p>
+    </div>
+    <div class="body">
+      <div class="note">Latihan ini punya 3 bagian: Listening, Translation, dan Spelling. Total 225 soal. Nyalakan suara perangkatmu.</div>
+      <div class="field"><label for="inName">Nama lengkap</label><input type="text" id="inName" placeholder="Ketik nama lengkap" autocomplete="off"></div>
+      <div class="field"><label for="inClass">Kelas</label><input type="text" id="inClass" placeholder="Contoh: 7A" autocomplete="off"></div>
+      <button class="btn mt" onclick="startApp()">Mulai latihan</button>
+    </div>
+  </section>
+
+  <!-- Between parts -->
+  <section id="s-inter" class="hidden">
+    <div class="hdr slim"><div class="date">Oct 5, 2026</div><h1>Word Workout</h1></div>
+    <div class="body center">
+      <span class="badge" id="nBadge">PART 1</span>
+      <h2 class="prompt" id="nTitle">Listening</h2>
+      <p class="sub" id="nDesc" style="margin-bottom:26px"></p>
+      <button class="btn" onclick="startPart()">Lanjut</button>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section id="s-quiz" class="hidden">
+    <div class="hdr slim"><div class="date">Oct 5, 2026</div><h1>Word Workout</h1></div>
+    <div class="prog">
+      <div class="pinfo"><span id="lPart">Part 1</span><span id="lCount">1 / 75</span></div>
+      <div class="track"><div class="bar" id="bar"></div></div>
+    </div>
+    <div class="body center" id="qbox"></div>
+  </section>
+
+  <!-- Result -->
+  <section id="s-result" class="hidden">
+    <div class="hdr slim"><div class="date">Oct 5, 2026</div><h1>Latihan selesai</h1></div>
+    <div class="body center">
+      <div class="card">
+        <p class="sub">Hasil akhir untuk</p>
+        <h2 id="dName" style="margin:4px 0 8px; font-size:1.7rem"></h2>
+        <p class="meta">Kelas: <strong id="dClass"></strong></p>
+        <p class="meta">Tanggal: <strong>Oct 5, 2026</strong></p>
+        <hr style="border:0; border-top:3px solid var(--ink); margin:16px 0 10px">
+        <p class="sub">Skor kamu</p>
+        <span class="score" id="dScore">0</span>
+        <span class="stamp">Oct 5, 2026</span>
+      </div>
+      <button class="btn go" onclick="downloadResult()">Unduh hasil (.html)</button>
+      <p class="sub mt" style="font-size:.9rem">Unduh file hasilmu, lalu kirimkan ke gurumu.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const TODAY = "Oct 5, 2026";
+
+// 75 kata: a = adjective, n = noun
+const RAW = `Big|Besar|a;Small|Kecil|a;Tall|Tinggi|a;Short|Pendek|a;Long|Panjang|a;Fast|Cepat|a;Slow|Lambat|a;Heavy|Berat|a;Light|Ringan|a;Hot|Panas|a;Cold|Dingin|a;Old|Tua / Lama|a;New|Baru|a;Young|Muda|a;Happy|Bahagia|a;Sad|Sedih|a;Angry|Marah|a;Tired|Lelah|a;Hungry|Lapar|a;Thirsty|Haus|a;Dirty|Kotor|a;Easy|Mudah|a;Difficult|Sulit|a;Cheap|Murah|a;Expensive|Mahal|a;Strong|Kuat|a;Weak|Lemah|a;Brave|Berani|a;Kind|Baik hati|a;Lazy|Malas|a;Diligent|Rajin|a;Clever|Pintar|a;Polite|Sopan|a;Beautiful|Cantik / Indah|a;Ugly|Jelek|a;Quiet|Tenang|a;Noisy|Berisik|a;Dangerous|Berbahaya|a;Safe|Aman|a;Empty|Kosong|a;Full|Penuh|a;Wet|Basah|a;Dry|Kering|a;Window|Jendela|n;Door|Pintu|n;Kitchen|Dapur|n;Bedroom|Kamar tidur|n;Garden|Kebun / Taman|n;Neighbor|Tetangga|n;Market|Pasar|n;Library|Perpustakaan|n;Hospital|Rumah sakit|n;Bridge|Jembatan|n;River|Sungai|n;Mountain|Gunung|n;Forest|Hutan|n;Island|Pulau|n;Weather|Cuaca|n;Season|Musim|n;Rain|Hujan|n;Cloud|Awan|n;Breakfast|Sarapan|n;Lunch|Makan siang|n;Vegetable|Sayuran|n;Fruit|Buah|n;Umbrella|Payung|n;Ticket|Tiket|n;Picture|Gambar / Foto|n;Letter|Surat|n;Holiday|Liburan|n;Birthday|Ulang tahun|n;Language|Bahasa|n;Homework|Pekerjaan rumah|n;Uniform|Seragam|n;Dictionary|Kamus|n`;
+const vocab = RAW.split(';').map((s,i)=>{const [en,id,c]=s.split('|');return {no:i+1,en,id,c};});
+
+const state = {user:{name:'',cls:''}, part:0, qs:[], i:0, score:0, total:225};
+const $ = id => document.getElementById(id);
+const show = id => ['s-login','s-inter','s-quiz','s-result'].forEach(s=>$(s).classList.toggle('hidden', s!==id));
+
+const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const distract = (w,key,n) => shuffle(vocab.filter(v=>v.c===w.c && v[key]!==w[key])).slice(0,n).map(v=>v[key]);
+const esc = s => s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function startApp(){
+  const n = $('inName').value.trim(), c = $('inClass').value.trim();
+  if(!n || !c){ alert('Lengkapi nama dan kelas dulu ya.'); return; }
+  state.user = {name:n, cls:c};
+  preparePart(1);
+}
+
+const INTRO = {
+  1:['PART 1','Listening','Tekan tombol speaker, dengarkan kata-nya, lalu pilih ejaan bahasa Inggris yang benar.'],
+  2:['PART 2','Translation','Pilih arti bahasa Indonesia yang tepat untuk kata bahasa Inggris yang tampil.'],
+  3:['PART 3','Spelling','Lihat kata bahasa Indonesia, lalu ketik kata bahasa Inggrisnya dengan ejaan yang benar.']
+};
+
+function preparePart(p){
+  state.part = p; state.i = 0;
+  state.qs = shuffle([...vocab]).map(w=>{
+    const q = {w};
+    if(p===1){ q.type='listen'; q.opts = shuffle([w.en, ...distract(w,'en',3)]); }
+    if(p===2){ q.type='trans';  q.opts = shuffle([w.id, ...distract(w,'id',3)]); }
+    if(p===3){ q.type='recall'; }
+    return q;
+  });
+  $('nBadge').textContent = INTRO[p][0];
+  $('nTitle').textContent = INTRO[p][1];
+  $('nDesc').textContent = INTRO[p][2];
+  show('s-inter');
+}
+
+function startPart(){ show('s-quiz'); renderQ(); }
+
+function renderQ(){
+  const box = $('qbox'), q = state.qs[state.i], w = q.w;
+  box.innerHTML = '';
+  $('lPart').textContent = 'Part ' + state.part;
+  $('lCount').textContent = (state.i+1) + ' / 75';
+  $('bar').style.width = ((((state.part-1)*75)+state.i+1)/state.total*100) + '%';
+
+  if(q.type==='listen'){
+    const b = document.createElement('button');
+    b.className='spk'; b.innerHTML='&#128266;'; b.setAttribute('aria-label','Putar suara'); b.onclick=()=>speak(w.en);
+    const h = document.createElement('p'); h.className='sub'; h.textContent='Tekan speaker untuk mendengar';
+    box.append(b,h); opts(box,q.opts,w.en);
+    setTimeout(()=>speak(w.en),300);
+  } else if(q.type==='trans'){
+    const t = document.createElement('div'); t.className='prompt'; t.textContent=w.en;
+    const h = document.createElement('p'); h.className='sub'; h.textContent='Apa arti kata ini?';
+    box.append(t,h); opts(box,q.opts,w.id);
+  } else {
+    const t = document.createElement('div'); t.className='prompt'; t.textContent=w.id;
+    const h = document.createElement('p'); h.className='sub'; h.textContent='Tulis dalam bahasa Inggris';
+    const f = document.createElement('div'); f.className='field mt';
+    const inp = document.createElement('input'); inp.type='text'; inp.id='rIn'; inp.className='recall';
+    inp.placeholder = '(' + w.en.length + ' huruf)'; inp.autocomplete='off'; inp.setAttribute('autocapitalize','off'); inp.spellcheck=false;
+    inp.onkeydown = e => { if(e.key==='Enter') checkRecall(w.en); };
+    f.appendChild(inp);
+    const s = document.createElement('button'); s.className='btn'; s.id='rBtn'; s.textContent='Cek jawaban'; s.onclick=()=>checkRecall(w.en);
+    box.append(t,h,f,s);
+    setTimeout(()=>inp.focus(),100);
+  }
+}
+
+function opts(box, list, correct){
+  const g = document.createElement('div'); g.className='opts';
+  list.forEach(o=>{
+    const b = document.createElement('button'); b.className='opt'; b.textContent=o;
+    b.onclick = () => pick(b, o, correct);
+    g.appendChild(b);
+  });
+  box.appendChild(g);
+}
+
+function speak(t){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function pick(btn, sel, correct){
+  const all = document.querySelectorAll('.opt');
+  all.forEach(b=>b.disabled=true);
+  if(sel===correct){ btn.classList.add('ok'); state.score++; }
+  else { btn.classList.add('no'); all.forEach(b=>{ if(b.textContent===correct) b.classList.add('ok'); }); }
+  setTimeout(next, 1000);
+}
+
+function checkRecall(correct){
+  const inp = $('rIn'); if(inp.disabled) return;
+  const v = inp.value.trim().toLowerCase();
+  inp.disabled = true; $('rBtn').disabled = true;
+  if(v===correct.toLowerCase()){ inp.style.background='var(--lime)'; state.score++; }
+  else { inp.style.background='var(--coral)'; inp.style.color='#fff'; inp.value = inp.value + ' > ' + correct.toUpperCase(); }
+  setTimeout(next, 1500);
+}
+
+function next(){
+  state.i++;
+  if(state.i >= state.qs.length){
+    if(state.part < 3) preparePart(state.part+1); else showResult();
+  } else renderQ();
+}
+
+function showResult(){
+  show('s-result');
+  $('dName').textContent = state.user.name;
+  $('dClass').textContent = state.user.cls;
+  $('dScore').textContent = Math.round(state.score/state.total*100);
+}
+
+function downloadResult(){
+  const name = esc(state.user.name), cls = esc(state.user.cls);
+  const score = $('dScore').textContent;
+  const topic = $('exerciseTopic').textContent;
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Hasil ${name}</title></head>
+<body style="background:#e9f2ee;margin:0;padding:20px">
+  <div style="border:3px solid #16213e;border-radius:16px;box-shadow:6px 6px 0 #16213e;background:#fffdf8;padding:24px;max-width:600px;margin:20px auto;font-family:sans-serif;color:#16213e">
+    <h2 style="color:#6c4cff;margin-top:0">Laporan Hasil Latihan</h2>
+    <div id="exerciseTopic" style="display:none">${topic}</div>
+    <p>Nama Siswa: <span id="resultName">${name}</span></p>
+    <p>Kelas: <span id="resultClass">${cls}</span></p>
+    <p>Tanggal: <span id="resultDate">${TODAY}</span></p>
+    <hr>
+    <h1>Skor Akhir: <span id="resultScore">${score}</span></h1>
+  </div>
+</body>
+</html>`;
+  const url = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+  const a = document.createElement('a');
+  const safe = s => s.replace(/[^a-z0-9]/gi,'_').toLowerCase();
+  a.href = url; a.download = `${safe(state.user.name)}_${safe(state.user.cls)}_VocabOct2026.html`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
